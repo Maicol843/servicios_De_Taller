@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edición de Términos y Condiciones - KILRES SRL</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            font-family: "Roboto", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        h1 {
+            font-family: "Dosis", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 600;
+            font-style: normal;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand text-primary" href="#">KILRES SRL</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="admin_dashboard.html"><i class="fa-solid fa-users"></i> Gestión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="terminos.html"><i class="fa-regular fa-handshake"></i> Términos</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-danger my-2 my-sm-0" type="button" onclick="cerrarSesion()"><i
+                        class="fa-solid fa-power-off"></i> Cerrar
+                    Sesión</button>
+            </form>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Edición de los términos y condiciones</h1>
+
+        <form id="termsForm">
+            <div class="form-group">
+                <label for="termsTextArea"><i class="fa-regular fa-handshake"></i> Escriba los términos y condiciones:</label>
+                <textarea class="form-control" id="termsTextArea" rows="10"></textarea>
+            </div>
+            <div class="d-flex justify-content-center align-items-center">
+                <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-secondary" onclick="resetTextArea()"><i
+                            class="fa-solid fa-rotate-right"></i> Reestablecer</button>
+                    <button type="button" class="btn btn-info" onclick="editTextArea()"><i
+                            class="fa-solid fa-pen-to-square"></i> Editar</button>
+                    <button type="button" class="btn btn-success" onclick="saveTextArea()"><i
+                            class="fa-regular fa-circle-down"></i> Guardar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        function cerrarSesion() {
+            window.location.href = "admin_login.html";
+        }
+        // Function to reset the text area
+        function resetTextArea() {
+            document.getElementById('termsTextArea').value = '';
+        }
+
+        // Function to make the text area editable
+        function editTextArea() {
+            document.getElementById('termsTextArea').readOnly = false;
+            document.getElementById('termsTextArea').focus();
+        }
+
+        // Function to save the text area content and send it to Terminos_Y_Condiciones.html
+        function saveTextArea() {
+            const termsContent = document.getElementById('termsTextArea').value;
+            localStorage.setItem('termsContent', termsContent);
+            alert("Se ha enviado correctamente");
+            document.getElementById('termsTextArea').readOnly = true;
+        }
+
+        // Load existing terms content from localStorage
+        window.onload = function () {
+            const savedContent = localStorage.getItem('termsContent');
+            if (savedContent) {
+                document.getElementById('termsTextArea').value = savedContent;
+            }
+            document.getElementById('termsTextArea').readOnly = true;
+        }
+    </script>
+</body>
+</html>
